@@ -1,8 +1,8 @@
 import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
-
+import { wrapper } from '../redux'
 import theme from '../theme'
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <ColorModeProvider
@@ -17,4 +17,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(App)

@@ -20,7 +20,7 @@ const categories = [
 
 export default function DefaultLayout({ children }) {
   return (
-    <Container maxW="xl" centerConten>
+    <Container maxW="xl" centerContent>
       <Box bg="#c8c8c8" w="100%" p={1} marginBottom={4}>
         <Flex justifyContent='center'>
           <Stack isInline spacing={8} align="center">
