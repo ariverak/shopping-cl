@@ -10,7 +10,7 @@ function Home() {
   useEffect(() => {
     getProducts();
   }, []);
-  if (fetching) return (
+  if (fetching || !products) return (
     <Spinner
       thickness="4px"
       speed="0.65s"
@@ -21,13 +21,16 @@ function Home() {
   )
   return (
     <DefaultLayout>
-      <ProductCard />
+      {products.map(product => (
+        <ProductCard product={product} />
+      ))}
     </DefaultLayout>
   )
 }
 
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
+  console.log(store.getState('products'))
 })
 
 export default Home;

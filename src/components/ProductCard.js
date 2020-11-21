@@ -1,68 +1,69 @@
 // Sample card from Airbnb
-import { Box, Image, Badge, Skeleton } from "@chakra-ui/core";
+import { Box, Image, Badge, Skeleton, Button } from "@chakra-ui/core";
 import { StarIcon } from "@chakra-ui/icons";
 
-function ProductCard() {
+function ProductCard({ product }) {
+
   const property = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
-    imageAlt: "Rear view of modern home with pool",
-    beds: 3,
-    baths: 2,
-    title: "Modern home in city center in the heart of historic Los Angeles",
-    formattedPrice: "$1,900.00",
-    reviewCount: 34,
-    rating: 4,
+    imageUrl: product.images?.images?.[0],
+    imageAlt: "",
+    title: product.name,
+    formattedPrice: product.price,
+    reviewCount: 0,
+    rating: 0,
   };
 
   return (
-    <Box maxW="sm" shadow="md" rounded="lg" overflow="hidden">
-      <Image ignoreFallback src={property.imageUrl} alt={property.imageAlt} />
+    <Box maxW="xs" shadow="md" rounded="lg" overflow="hidden">
+      <Image maxW="xs" width='100%' maxH={300} objectFit='contain' ignoreFallback src={property.imageUrl} alt={property.imageAlt} />
       <Box p="6">
         <Box d="flex" alignItems="baseline">
-          <Badge rounded="full" colorScheme='teal'>
-            New
+          <Badge style={{ marginRight: 10 }} rounded="full" colorScheme='teal'>
+            Nuevo
           </Badge>
-          <Box
-            color="gray.500"
-            fontWeight="semibold"
-            letterSpacing="wide"
-            fontSize="xs"
-            textTransform="uppercase"
-            ml="2"
-          >
-            {property.beds} beds &bull; {property.baths} baths
-          </Box>
+          {product.isFreeShipping && (
+            <Badge rounded="full" colorScheme='yellow'>
+              Envio Gratis
+            </Badge>
+          )}
         </Box>
-
         <Box
           mt="1"
-          fontWeight="semibold"
+          fontSize={12}
+          fontWeight="bold"
           as="h4"
-          lineHeight="tight"
+          color
           isTruncated
         >
           {property.title}
         </Box>
 
-        <Box>
+        <Box
+          fontWeight="semibold"
+        >
           {property.formattedPrice}
-          <Box as="span" color="gray.600" fontSize="sm">
-            / wk
+          <Box as="span" color="gray.600" fontSize="xs">
+            / clp
           </Box>
         </Box>
 
-        <Box d="flex" mt="2" alignItems="center">
-          {Array(5)
-            .fill("")
-            .map((_, i) => (
-              <StarIcon
-                key={i}
-                color={i < property.rating ? "teal.500" : "gray.300"}
-              />
-            ))}
-          <Box as="span" ml="2" color="gray.600" fontSize="sm">
-            {property.reviewCount} reviews
+        <Box d="flex" mt="2" justifyContent='space-between' alignItems="center">
+          <Box d="flex" alignItems="center">
+            {Array(5)
+              .fill("")
+              .map((_, i) => (
+                <StarIcon
+                  key={i}
+                  color={i < property.rating ? "teal.500" : "gray.300"}
+                />
+              ))}
+            <Box as="span" ml="2" color="gray.600" fontSize="sm">
+              {property.reviewCount} reseñas
+            </Box>
           </Box>
+          <Button colorScheme="teal" size="sm">
+            Comprar
+          </Button>
         </Box>
       </Box>
     </Box>
